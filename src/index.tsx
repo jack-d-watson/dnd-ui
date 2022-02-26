@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './components/App/App';
 import reportWebVitals from './reportWebVitals';
+import { Header } from './components/Header/Header';
+import { Footer } from './components/Footer/Footer';
+import { MonsterDisplay } from './components/Monster/Monster';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Header/>
+    <MonsterDisplay monsterIndex="adult-black-dragon" />
+    <Footer/>
   </React.StrictMode>,
   document.getElementById('root')
 );
