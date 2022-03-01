@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: lightgray;
 }
 
 code {
@@ -15,4 +16,17 @@ code {
 .center {
   display: flex;
   justify-content: center;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.section-seperator {
+  border-bottom: 2px solid;
+  border-color: #bc0f0f
 }
