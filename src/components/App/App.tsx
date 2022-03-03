@@ -1,12 +1,10 @@
 import './App.css';
-import { MonsterDisplay } from '../Monster/Monster';
+import { MonsterSelector } from '../MonsterSelector/MonsterSelector';
 
 function App() {
   return (
-    <div className="App center">
-      <MonsterDisplay monsterIndex="adult-black-dragon" />
-      <MonsterDisplay monsterIndex="assassin" />
-      <MonsterDisplay monsterIndex="bandit" />
+    <div className="App">
+      <MonsterSelector />
     </div>
   );
 }

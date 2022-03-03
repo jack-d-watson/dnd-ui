@@ -1,5 +1,6 @@
 import axios from "axios"
 import { Action } from "../types/Action"
+import { ApiReference } from "../types/APIReference"
 import { Monster, MonsterSenses, MonsterSpeed } from "../types/Monster"
 
 const API_URL = "https://www.dnd5eapi.co/api"
@@ -20,7 +21,6 @@ function convertSpeedToString(speed: MonsterSpeed): string {
 export async function getMonsterByIndex(index: string) : Promise<Monster> {
     const response = await axios.get(`${API_URL}/monsters/${index}`)
     const monster : Monster = response.data
-    console.log(`monster type=${typeof monster}`)
     // Ensure monster.speed is an object and not a string
     if(typeof monster.speed === "object") {
         // Convert monster.speed to a string thats friendly to printing
@@ -28,6 +28,12 @@ export async function getMonsterByIndex(index: string) : Promise<Monster> {
     }
 
     return response.data
+}
+
+export async function getMonsterList() : Promise<Array<ApiReference>> {
+    const response = await axios.get(`${API_URL}/monsters/`)
+    const monsterList : Array<ApiReference> = response.data.results
+    return monsterList
 }
 
 export function getAbilityAbbreviation(ability: string) {
@@ -42,13 +48,29 @@ export function firstLetterToUpperCase(str: string) : string {
  * 
  * @param list an array with at least one element
  */
-export function getFormattedDamageConditionTypes(list: string[]) : string {
+export function getFormattedDamageTypes(list: string[]) : string {
+    let formattedString = ""
+    for(let item of list) {
+        console.log(item)
+        if(formattedString.length > 0) {
+            formattedString += ", "
+        }
+        formattedString += firstLetterToUpperCase(item)
+    }
+    return formattedString
+}
+
+/**
+ * 
+ * @param list an array with at least one element
+ */
+ export function getFormattedConditionTypes(list: ApiReference[]) : string {
     let formattedString = ""
     for(let item of list) {
         if(formattedString.length > 0) {
             formattedString += ", "
         }
-        formattedString += firstLetterToUpperCase(item)
+        formattedString += firstLetterToUpperCase(item.name)
     }
     return formattedString
 }

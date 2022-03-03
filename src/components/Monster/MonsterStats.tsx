@@ -1,7 +1,7 @@
 import React from "react";
 import { Monster } from "../../types/Monster";
 import { Proficiency, ProficiencyType } from "../../types/Proficiency";
-import { formatChallengeRating, formatSensesAsString, getFormattedDamageConditionTypes } from "../../utils/monsterUtils";
+import { formatChallengeRating, formatSensesAsString, getFormattedConditionTypes, getFormattedDamageTypes } from "../../utils/monsterUtils";
 import { getProficiencyName, getProficiencyType, getProficiencyValue } from "../../utils/proficiencyUtils";
 import { Field } from "../common/Field";
 import { AbilityScore } from "./AbilityScore";
@@ -67,10 +67,10 @@ export function MonsterStats (props: MonsterStatProps) {
             
             {displayMonsterAbilityScores(monster)}
             {displayMonsterProficiencies(monster.proficiencies)}
-            {monster.damage_vulnerabilities.length > 0 ? <Field label="Damage Vulnerabilities" value={getFormattedDamageConditionTypes(monster.damage_vulnerabilities)} isBold={true} isItalic={false} /> : <></>}
-            {monster.damage_resistances.length > 0 ? <Field label="Damage Resistances" value={getFormattedDamageConditionTypes(monster.damage_resistances)} isBold={true} isItalic={false} /> : <></>}
-            {monster.damage_immunities.length > 0 ? <Field label="Damage Immunities" value={getFormattedDamageConditionTypes(monster.damage_immunities)} isBold={true} isItalic={false} /> : <></>}
-            {monster.condition_immunities.length > 0 ? <Field label="Condition Immunities" value={getFormattedDamageConditionTypes(monster.condition_immunities)} isBold={true} isItalic={false} /> : <></>}
+            {monster.damage_vulnerabilities.length > 0 ? <Field label="Damage Vulnerabilities" value={getFormattedDamageTypes(monster.damage_vulnerabilities)} isBold={true} isItalic={false} /> : <></>}
+            {monster.damage_resistances.length > 0 ? <Field label="Damage Resistances" value={getFormattedDamageTypes(monster.damage_resistances)} isBold={true} isItalic={false} /> : <></>}
+            {monster.damage_immunities.length > 0 ? <Field label="Damage Immunities" value={getFormattedDamageTypes(monster.damage_immunities)} isBold={true} isItalic={false} /> : <></>}
+            {monster.condition_immunities.length > 0 ? <Field label="Condition Immunities" value={getFormattedConditionTypes(monster.condition_immunities)} isBold={true} isItalic={false} /> : <></>}
             <Field label="Senses" value={formatSensesAsString(monster.senses)} isBold={true} isItalic={false} />
             <Field label="Languages" value={monster.languages} isBold={true} isItalic={false} />
             <Field label="Challenge" value={`${formatChallengeRating(monster.challenge_rating)} (${new Intl.NumberFormat().format(monster.xp)} XP)`} isBold={true} isItalic={false} />        

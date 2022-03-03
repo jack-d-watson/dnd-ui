@@ -10,11 +10,11 @@
     border-radius: 5px;
     background-color: white;
     padding: 5px;
-    width: 50%;
 }
 
 .section-title {
     margin-bottom: 1px;
+    margin-top: 15px;
     color: #822000;
 }
 

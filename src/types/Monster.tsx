@@ -1,4 +1,5 @@
 import { Action } from "./Action"
+import { ApiReference } from "./APIReference"
 import { Proficiency } from "./Proficiency"
 
 export interface MonsterSpeed {
@@ -29,7 +30,7 @@ export type Monster = {
     damage_vulnerabilities: string[],
     damage_resistances: string[],
     damage_immunities: string[],
-    condition_immunities: string[],
+    condition_immunities: ApiReference[],
     senses: MonsterSenses,
     languages: string,
     challenge_rating: number,

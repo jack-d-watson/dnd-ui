@@ -29,3 +29,7 @@ code {
   border-bottom: 2px solid;
   border-color: #bc0f0f
 }
+
+.App {
+  width: 50%;
+}
