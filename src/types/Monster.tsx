@@ -1,3 +1,4 @@
+import { Action } from "./Action"
 import { Proficiency } from "./Proficiency"
 
 export interface MonsterSpeed {
@@ -6,15 +7,6 @@ export interface MonsterSpeed {
 
 export interface MonsterSenses {
     [key: string]: string | number
-}
-
-export interface MonsterSpecialAbility {
-    name: string,
-    desc: string,
-    usage?: {
-        type: string,
-        times: number
-    }
 }
 
 export type Monster = {
@@ -42,8 +34,8 @@ export type Monster = {
     languages: string,
     challenge_rating: number,
     xp: number,
-    special_abilities?: MonsterSpecialAbility[] | undefined,
-    actions: object[],
-    legendary_actions: object[],
+    special_abilities?: Action[] | undefined,
+    actions: Action[] | undefined,
+    legendary_actions: Action[] | undefined,
     url: string,
 }

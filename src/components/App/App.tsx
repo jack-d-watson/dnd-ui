@@ -3,7 +3,7 @@ import { MonsterDisplay } from '../Monster/Monster';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App center">
       <MonsterDisplay monsterIndex="adult-black-dragon" />
       <MonsterDisplay monsterIndex="assassin" />
       <MonsterDisplay monsterIndex="bandit" />

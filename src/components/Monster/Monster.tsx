@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Monster } from "../../types/Monster";
-import { Proficiency, ProficiencyType } from "../../types/Proficiency";
-import { formatChallengeRating, formatSensesAsString, getAbilityAbbreviation, getAbilityLabel, getFormattedDamageConditionTypes, getMonsterByIndex } from "../../utils/monsterUtils";
-import { getProficiencyType, getProficiencyName, getProficiencyValue } from "../../utils/proficiencyUtils";
-import { Field } from "../common/Field";
-import { AbilityScore } from "./AbilityScore";
+import { getMonsterByIndex } from "../../utils/monsterUtils";
 import './Monster.css'
+import { MonsterActions } from "./MonsterActions";
 import { MonsterStats } from "./MonsterStats";
 
 export interface MonsterProps {
@@ -27,22 +24,35 @@ export function MonsterDisplay(props: MonsterProps) {
     if(monster) {
         return (
             <div className="monster" id={"monster-" + monster.index}>
-                <div className="title section-seperator">
-                    <h2 className="name">{monster.name}</h2>
+                <div className="section-seperator">
+                    <h1 className="section-title name">{monster.name}</h1>
                     <p className="descriptors italic">{monster.size} {monster.type}{monster.subtype ? ` (${monster.subtype})` : "" }, {monster.alignment} </p>
                 </div>
                 <MonsterStats monster={monster} />
                 <br/>
-                <div className="special-abilities">
-                    {monster.special_abilities ? 
-                            monster.special_abilities.map( (ability) => {
-                                console.log(`${monster.name} ability: ${ability.name}`)
-                                return (<Field label={getAbilityLabel(ability)} value={ability.desc} isBold={true} isItalic={true} />)
-                            })
-                        : <></>
-                    }
-                </div>
-                
+                {
+                    monster.special_abilities ? 
+                    <div className="" id="special-abilities">
+                        <MonsterActions actionList={monster.special_abilities} />
+                    </div>
+                    : <></>
+                }
+                {
+                    monster.actions ? 
+                    <div className="" id="actions">
+                        <h2 className="section-title section-seperator">Actions</h2>
+                        <MonsterActions actionList={monster.actions} />
+                    </div>
+                    : <></>
+                }
+                {
+                    monster.legendary_actions ? 
+                    <div className="" id="legendary-actions">
+                        <h2 className="section-title section-seperator">Legendary Actions</h2>
+                        <MonsterActions actionList={monster.legendary_actions} />
+                    </div>
+                    : <></>
+                }
             </div>
         )
     }

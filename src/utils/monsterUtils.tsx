@@ -1,5 +1,6 @@
 import axios from "axios"
-import { Monster, MonsterSenses, MonsterSpecialAbility, MonsterSpeed } from "../types/Monster"
+import { Action } from "../types/Action"
+import { Monster, MonsterSenses, MonsterSpeed } from "../types/Monster"
 
 const API_URL = "https://www.dnd5eapi.co/api"
 
@@ -78,11 +79,29 @@ export function formatChallengeRating(challengeRating: number) : string {
     }
 }
 
-export function getAbilityLabel(ability: MonsterSpecialAbility) : string {
-    let label = ability.name
-    if(ability.usage) {
-        label += ` (${ability.usage.times} ${ability.usage.type})`
-        label = label.replace(" per ", "/")
+function getDiceMaxValue(dice: string) : number {
+    return parseInt(dice.substring(dice.indexOf("d") + 1))
+}
+
+export function getAbilityLabel(action: Action) : string {
+    let label = action.name
+    if(action.usage) {
+        if(action.usage.times) {
+            label += ` (${action.usage.times} ${action.usage.type})`
+            label = label.replace(" per ", "/")
+        }
+        else if(action.usage.dice && action.usage.min_value) {
+            const diceMaxValue = getDiceMaxValue(action.usage.dice)
+            // If the provided dice can roll higher than the minValue required for a Recharge
+            // then the add a range like (Recharge X-Y)
+            if(diceMaxValue > action.usage.min_value) {
+                label +=` (Recharge ${action.usage.min_value}-${diceMaxValue})`
+            }
+            // otherwise add (Recharge X)
+            else {
+                label +=` (Recharge ${action.usage.min_value})`
+            }
+        }
     }
 
     return `${label}.`

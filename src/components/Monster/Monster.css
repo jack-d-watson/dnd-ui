@@ -1,6 +1,7 @@
 .abilityScoreList { 
     white-space: nowrap;
     overflow-x: auto;
+    padding-bottom: 5px;
 }
 
 .monster {
@@ -9,10 +10,12 @@
     border-radius: 5px;
     background-color: white;
     padding: 5px;
+    width: 50%;
 }
 
-.name {
+.section-title {
     margin-bottom: 1px;
+    color: #822000;
 }
 
 .descriptors {

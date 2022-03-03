@@ -1,4 +1,5 @@
 import React from "react";
+import './Field.css'
 
 export declare interface FieldProps {
     label: string,
@@ -19,6 +20,6 @@ export function Field(props: FieldProps) {
     }
 
     return (
-        <div><span className={labelClasses}>{label}</span> <span>{value}</span></div>
+        <div  className="field"><span className={labelClasses}>{label}</span> <span>{value}</span></div>
     );
 }
