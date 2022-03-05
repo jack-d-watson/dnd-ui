@@ -1,6 +1,25 @@
-# Getting Started with Create React App
+# DND-UI
+
+A simple user interface to display various creatures, spells, and other information from Dungeons & Dragons 5th Edition.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+# Features
+* Pickable list of creatures that displays all info on selected creature
+
+## Future features
+* Full 'encyclopedia' of rules, mechanics, character data, classes, spells, etc.
+    * Classes
+    * Races
+    * Equipment
+    * Spells
+    * Feats
+    * Game Mechanics
+    * Rules
+    * Character Data (ability scores, skills, proficiencies, etc.)
+* Character builder
+* Filter lists of resources based on their properties (all monsters of a given type, all spells of a certain level, etc.)
+* Encounter builder
 
 ## Available Scripts
 
@@ -39,8 +58,4 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).

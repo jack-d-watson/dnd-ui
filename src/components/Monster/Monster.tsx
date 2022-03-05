@@ -6,20 +6,22 @@ import { MonsterActions } from "./MonsterActions";
 import { MonsterStats } from "./MonsterStats";
 
 export interface MonsterProps {
-    monsterIndex: string
+    index: string | undefined
 }
 
 export function MonsterDisplay(props: MonsterProps) {
-    const { monsterIndex } = props
+    const { index } = props
     const [monster, setMonster] = useState<Monster | null>();
 
     useEffect(() => {
-        getMonsterByIndex(monsterIndex).then((response) => {
-            setMonster(response)
-        }).catch((error) => {
-            console.error(`Error getting Monster ${monsterIndex}.`, error)
-        })
-    }, [monsterIndex])
+        if(index) {
+            getMonsterByIndex(index).then((response) => {
+                setMonster(response)
+            }).catch((error) => {
+                console.error(`Error getting Monster ${index}.`, error)
+            })
+        }
+    }, [index])
 
     if(monster) {
         return (

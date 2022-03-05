@@ -1,10 +1,15 @@
 import './App.css';
-import { MonsterSelector } from '../MonsterSelector/MonsterSelector';
+import { MonsterSelector } from '../Selectors/MonsterSelector';
+import { Route, Routes } from 'react-router-dom';
+import { SpellSelector } from '../Selectors/SpellSelector';
 
 function App() {
   return (
     <div className="App">
-      <MonsterSelector />
+      <Routes>
+        <Route path="/monsters" element={<MonsterSelector />} />
+        <Route path="/spells" element={<SpellSelector />} />
+      </Routes>
     </div>
   );
 }

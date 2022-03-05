@@ -2,8 +2,7 @@ import axios from "axios"
 import { Action } from "../types/Action"
 import { ApiReference } from "../types/APIReference"
 import { Monster, MonsterSenses, MonsterSpeed } from "../types/Monster"
-
-const API_URL = "https://www.dnd5eapi.co/api"
+import { API_URL } from "./apiReferenceUtils"
 
 function convertSpeedToString(speed: MonsterSpeed): string {
     let friendlySpeed = ""
@@ -28,12 +27,6 @@ export async function getMonsterByIndex(index: string) : Promise<Monster> {
     }
 
     return response.data
-}
-
-export async function getMonsterList() : Promise<Array<ApiReference>> {
-    const response = await axios.get(`${API_URL}/monsters/`)
-    const monsterList : Array<ApiReference> = response.data.results
-    return monsterList
 }
 
 export function getAbilityAbbreviation(ability: string) {

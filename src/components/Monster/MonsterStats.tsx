@@ -29,13 +29,13 @@ function displayMonsterProficiencies(proficiencies: Proficiency[]) : JSX.Element
         // Seperate based on proficiency type
         if(getProficiencyType(proficiency) === ProficiencyType.SAVING_THROW) {
             // Add a comma if something has been added to the string already
-            if(savingThrows != "") {
+            if(savingThrows !== "") {
                 savingThrows += ", "
             }
             savingThrows += `${getProficiencyName(proficiency)} ${value}`
         }
         else {
-            if(skills != "") {
+            if(skills !== "") {
                 skills += ", "
             }
             skills += `${getProficiencyName(proficiency)} ${value}`

@@ -5,12 +5,16 @@ import App from './components/App/App';
 import reportWebVitals from './reportWebVitals';
 import { Header } from './components/Header/Header';
 import { Footer } from './components/Footer/Footer';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Header/>
-    <App/>
-    <Footer/>
+    
+    <BrowserRouter>
+      <Header/>
+      <App/>
+      <Footer/>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
