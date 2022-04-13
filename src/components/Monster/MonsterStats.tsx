@@ -1,7 +1,7 @@
 import React from "react";
 import { Monster } from "../../types/Monster";
 import { Proficiency, ProficiencyType } from "../../types/Proficiency";
-import { formatChallengeRating, formatSensesAsString, getFormattedConditionTypes, getFormattedDamageTypes } from "../../utils/monsterUtils";
+import { convertSpeedToString, formatChallengeRating, formatSensesAsString, getFormattedConditionTypes, getFormattedDamageTypes } from "../../utils/monsterUtils";
 import { getProficiencyName, getProficiencyType, getProficiencyValue } from "../../utils/proficiencyUtils";
 import { Field } from "../common/Field";
 import { AbilityScore } from "./AbilityScore";
@@ -62,7 +62,7 @@ export function MonsterStats (props: MonsterStatProps) {
             <div className="section-seperator">
                 <Field label="Armor Class" value={`${monster.armor_class}`} isBold={true} isItalic={false} />          
                 <Field label="Hit Points" value={`${monster.hit_points}`} isBold={true} isItalic={false} />
-                <Field label="Speed" value={`${monster.speed}`} isBold={true} isItalic={false} />
+                <Field label="Speed" value={`${convertSpeedToString(monster.speed)}`} isBold={true} isItalic={false} />
             </div>
             
             {displayMonsterAbilityScores(monster)}

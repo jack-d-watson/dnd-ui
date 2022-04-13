@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ApiReference } from "../../../types/APIReference";
-import { getResourceList } from "../../../utils/apiReferenceUtils";
+import { gql, useQuery } from "@apollo/client"
 import './ResourceSelector.css'
 
 export interface ResourceSelectorProps {
@@ -13,38 +13,56 @@ export interface ResourceSelectorProps {
 
 export function ResourceSelector(props: ResourceSelectorProps) {
     const { resourceListUri, onResourceSelected, label, id, children } = props
-    const [resourceList, setResourceList] = useState(new Array<ApiReference>())
 
-    useEffect(() => {
-        getResourceList(resourceListUri).then((list: ApiReference[]) => {
-            setResourceList(list)
-            onResourceSelected({ target: { value: list[0].index}})
-        }).catch((error: any) => {
-            console.error(`Error getting Resources from ${resourceListUri}.`, error)
-        })
-    }, [resourceListUri])
-    
-    if(resourceList.length > 0) {
+    const RESOURCE_LIST = gql`
+        query {
+            ${resourceListUri} {
+                index
+                name
+                url
+            }
+        }
+    `
+    const resourceList = useQuery(RESOURCE_LIST, {
+        onCompleted: (data) => {
+            onResourceSelected({
+                target: {
+                    value: data[resourceListUri][0].index
+                }
+            })
+        }
+    })
+
+    if (resourceList.loading) {
         return (
             <div className="resourceSelector">
-                <label htmlFor={`${id}Selector`}>{label}</label>
-                <select name={`${id}Selector`} onChange={onResourceSelected}>
-                    {
-                        resourceList.map((resource: ApiReference) => {
-                            return (<option value={resource.index}>{resource.name}</option>)
-                        })
-                    }
-                </select>
-               {
-                   children
-               }
-            </div>   
+                <h1>Loading...</h1>
+            </div>
+        )
+    }
+
+    if (resourceList.error) {
+        console.error(`Error retrieving ResourceSelector list for ${resourceListUri}: ${resourceList.error.message}`)
+        return (
+            <div className="resourceSelector">
+                <h1>Error: {resourceList.error.message}</h1>
+            </div>
         )
     }
 
     return (
         <div className="resourceSelector">
-            <h1>Loading...</h1>
+            <label htmlFor={`${id}Selector`}>{label}</label>
+            <select name={`${id}Selector`} onChange={onResourceSelected}>
+                {
+                    resourceList.data[resourceListUri].map((resource: ApiReference) => {
+                        return (<option value={resource.index}>{resource.name}</option>)
+                    })
+                }
+            </select>
+            {
+                children
+            }
         </div>
     )
 }

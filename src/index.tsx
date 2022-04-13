@@ -6,15 +6,23 @@ import reportWebVitals from './reportWebVitals';
 import { Header } from './components/Header/Header';
 import { Footer } from './components/Footer/Footer';
 import { BrowserRouter } from 'react-router-dom';
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client"
+
+const client = new ApolloClient({
+  uri: "https://www.dnd5eapi.co/graphql",
+  cache: new InMemoryCache()
+})
 
 ReactDOM.render(
   <React.StrictMode>
-    
     <BrowserRouter>
-      <Header/>
-      <App/>
-      <Footer/>
+      <ApolloProvider client={client}>
+        <Header />
+        <App />
+        <Footer />
+      </ApolloProvider>
     </BrowserRouter>
+
   </React.StrictMode>,
   document.getElementById('root')
 );

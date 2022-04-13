@@ -1,32 +1,22 @@
-import axios from "axios"
 import { Action } from "../types/Action"
 import { ApiReference } from "../types/APIReference"
-import { Monster, MonsterSenses, MonsterSpeed } from "../types/Monster"
-import { API_URL } from "./apiReferenceUtils"
+import { MonsterSenses, MonsterSpeed } from "../types/Monster"
 
-function convertSpeedToString(speed: MonsterSpeed): string {
+const TYPENAME = "__typename"
+
+export function convertSpeedToString(speed: MonsterSpeed): string {
     let friendlySpeed = ""
     for(const key in speed) {
-        if(key === "walk") {
-            friendlySpeed += speed[key]
-        }
-        else {
-            friendlySpeed += `, ${key} ${speed[key]}`
+        if(speed[key] && key !== TYPENAME) {
+            if(key === "walk") {
+                friendlySpeed = speed[key] + friendlySpeed
+            }
+            else {
+                friendlySpeed += `, ${key} ${speed[key]}`
+            }
         }
     }
     return friendlySpeed
-}
-
-export async function getMonsterByIndex(index: string) : Promise<Monster> {
-    const response = await axios.get(`${API_URL}/monsters/${index}`)
-    const monster : Monster = response.data
-    // Ensure monster.speed is an object and not a string
-    if(typeof monster.speed === "object") {
-        // Convert monster.speed to a string thats friendly to printing
-        monster.speed = convertSpeedToString(monster.speed)
-    }
-
-    return response.data
 }
 
 export function getAbilityAbbreviation(ability: string) {
@@ -71,16 +61,19 @@ export function getFormattedDamageTypes(list: string[]) : string {
 export function formatSensesAsString(senses: MonsterSenses) : string {
     let formattedSenses = ""
     for(let sense in senses) {
-        if(formattedSenses.length > 0) {
-            formattedSenses += ", "
-        }
+        if(sense !== TYPENAME && senses[sense]) {
+            if(formattedSenses.length > 0) {
+                formattedSenses += ", "
+            }
 
-        if(sense === "passive_perception") {
-            formattedSenses += `Passive Perception ${senses[sense]}`
+            if(sense === "passive_perception") {
+                formattedSenses += `Passive Perception ${senses[sense]}`
+            }
+            else {
+                formattedSenses += `${firstLetterToUpperCase(sense)} ${senses[sense]}`
+            }
         }
-        else {
-            formattedSenses += `${firstLetterToUpperCase(sense)} ${senses[sense]}`
-        }
+        
     }
     return formattedSenses
 }
