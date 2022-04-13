@@ -19,7 +19,7 @@ export type Monster = {
     alignment: string,
     armor_class: number,
     hit_points: number,
-    speed: MonsterSpeed | string,
+    speed: MonsterSpeed,
     strength: number,
     dexterity: number,
     constitution: number,
