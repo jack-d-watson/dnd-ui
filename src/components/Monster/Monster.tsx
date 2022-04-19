@@ -32,8 +32,9 @@ export function MonsterDisplay(props: MonsterProps) {
     }
 
     const monster : Monster = data.monster
+    console.log(monster)
     return (
-        <div className="monster" id={"monster-" + monster.index}>
+        <div className="reference-card" id={"monster-" + monster.index}>
             <div className="section-seperator">
                 <h1 className="section-title name">{monster.name}</h1>
                 <p className="descriptors italic">{monster.size} {monster.type}{monster.subtype ? ` (${monster.subtype})` : "" }, {monster.alignment} </p>
@@ -41,14 +42,14 @@ export function MonsterDisplay(props: MonsterProps) {
             <MonsterStats monster={monster} />
             <br/>
             {
-                monster.special_abilities ? 
+                monster.special_abilities && monster.special_abilities.length > 0 ? 
                 <div className="" id="special-abilities">
                     <MonsterActions actionList={monster.special_abilities} />
                 </div>
                 : <></>
             }
             {
-                monster.actions ? 
+                monster.actions && monster.actions.length > 0 ? 
                 <div className="" id="actions">
                     <h2 className="section-title section-seperator">Actions</h2>
                     <MonsterActions actionList={monster.actions} />
@@ -56,7 +57,7 @@ export function MonsterDisplay(props: MonsterProps) {
                 : <></>
             }
             {
-                monster.legendary_actions ? 
+                monster.legendary_actions && monster.legendary_actions.length > 0 ? 
                 <div className="" id="legendary-actions">
                     <h2 className="section-title section-seperator">Legendary Actions</h2>
                     <MonsterActions actionList={monster.legendary_actions} />

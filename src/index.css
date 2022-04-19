@@ -30,6 +30,18 @@ code {
   border-color: #bc0f0f
 }
 
+.descriptors {
+  margin-top: 5px;
+}
+
+.reference-card  {
+  margin: 5px;
+  border: 2px solid rgb(87, 87, 87);
+  border-radius: 5px;
+  background-color: white;
+  padding: 5px;
+}
+
 .App {
   width: 50%;
 }

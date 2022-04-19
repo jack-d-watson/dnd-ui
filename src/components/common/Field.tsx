@@ -20,6 +20,6 @@ export function Field(props: FieldProps) {
     }
 
     return (
-        <div  className="field"><span className={labelClasses}>{label}</span> <span>{value}</span></div>
+        <div className="field"><span className={labelClasses}>{label}</span> <span>{value}</span></div>
     );
 }

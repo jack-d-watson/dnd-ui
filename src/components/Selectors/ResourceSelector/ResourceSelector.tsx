@@ -16,7 +16,7 @@ export function ResourceSelector(props: ResourceSelectorProps) {
 
     const RESOURCE_LIST = gql`
         query {
-            ${resourceListUri} {
+            ${resourceListUri}(sort: INDEX_ASC, limit: 1000) {
                 index
                 name
                 url

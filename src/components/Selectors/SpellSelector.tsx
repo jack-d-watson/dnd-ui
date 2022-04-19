@@ -7,6 +7,7 @@ export function SpellSelector() {
 
     const onSelectSpell = (event: any) => {
         setSpellIndex(event.target.value)
+        console.log(spellIndex)
     }
 
     return (
